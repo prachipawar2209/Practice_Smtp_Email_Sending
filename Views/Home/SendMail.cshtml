@@ -1,0 +1,72 @@
+﻿@model SendEmail.Models.EmailModel
+
+@{
+    ViewBag.Title = "Send Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Send an Email</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("SendMail", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "true" }))
+            {
+                <div class="mb-3">
+                    <label for="To" class="form-label">To:</label>
+                    @Html.TextBoxFor(model => model.To, new { @class = "form-control", placeholder = "Recipient Email", required = "required" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="Subject" class="form-label">Subject:</label>
+                    @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", placeholder = "Email Subject", required = "required" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="Body" class="form-label">Body:</label>
+                    @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows = "4", placeholder = "Enter your message...", required = "required" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="Attachment" class="form-label">File Attachment:</label>
+                    @Html.TextBoxFor(model => model.Attachment, new { type = "file", @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Your Gmail Email:</label>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Your Gmail", required = "required" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="Password" class="form-label">Your App Password:</label>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "App Password", required = "required" })
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success px-4">Send Email</button>
+                </div>
+
+                <br />
+                <div class="text-center">
+                    <span class="text-success fw-bold">@ViewBag.Message</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+    }
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .btn {
+        font-size: 18px;
+    }
+</style>
